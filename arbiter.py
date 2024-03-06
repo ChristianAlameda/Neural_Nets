@@ -16,6 +16,14 @@ class Arbiter():
         pass
 
     def _configureFilename(self, timeData):
+        """_summary_
+
+        Args:
+            timeData (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         currTimeString = str(timeData[0])
         if len(str(timeData[1])) == 1:
             currTimeString += '0'+str(timeData[1])
@@ -28,6 +36,8 @@ class Arbiter():
         return currTimeString
     
     def _setLogger(self):
+        """_summary_
+        """
         if not Path('./logs').is_dir():
             Path('./logs').mkdir()
             print(time.ctime()+' - ./logs directory has been created.')
@@ -38,6 +48,8 @@ class Arbiter():
         print(time.ctime()+' - Saving log to runtime_'+self._configureFilename(self.__currTime)+'.log')
     
     def _configureDirectories(self):
+        """_summary_
+        """
         if not Path('./data').is_dir():
             Path('./data').mkdir()
             logging.info(time.ctime()+' - ./data directory has been created.')
@@ -49,9 +61,13 @@ class Arbiter():
             logging.info(time.ctime()+' - ./graphs/availability directory has been created.')
 
     def _loadModel(self):
+        """_summary_
+        """
         pass
 
     def _createModel(self):
+        """_summary_
+        """
         self.__model = tf.keras.Sequential([
             # tf.keras.layers.BatchNormalization(),
             # tf.keras.layers.Reshape((1,1)),
@@ -72,8 +88,9 @@ class Arbiter():
         self._saveModel()
     
     def _saveModel(self):
-        """Saves the model to a file using the name provided in self.__modelFilename
+        """_summary_: Saves the model to a file using the name provided in self.__modelFilename
         """
+        
         try:
             #self.__model.summary()
             self.__model.save(self.__modelFilename)
@@ -81,11 +98,21 @@ class Arbiter():
             print(str(time.ctime())+' - Could not save '+self.__modelFilename)
 
     def _train(self):
+        """_summary_
+        """
         pass
 
     def _evaluate(self):
+        """_summary_
+        """
         pass
 
     def _loadData(self, filename:str='data/20230101_20241231_Turlock_CA_USA.tot_lev15', format:str='csv'):
+        """_summary_
+
+        Args:
+            filename (str, optional): _description_. Defaults to 'data/20230101_20241231_Turlock_CA_USA.tot_lev15'.
+            format (str, optional): _description_. Defaults to 'csv'.
+        """
         self.__data.readDataFromFile(filename, format)
 # end Arbiter
